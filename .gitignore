@@ -1,2 +1,4 @@
 /php/composer.lock
 /php/vendor/*
+/php/humbuglog.json
+/php/humbuglog.txt

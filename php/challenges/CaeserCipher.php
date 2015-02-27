@@ -27,6 +27,9 @@ class CaeserCipher
 
     private function shiftText($shift, $text)
     {
+        // Convert to 0-25. Due to the fact that 65 % 26 = 13, addition or
+        // subtraction would work here, after the modulo arithmatic. So,
+        // ($x - 65) % 26 == ($x + 65) % 26 == ($x - 13) % 26
         $shift -= self::A;
         $text = strtoupper($text);
         $shiftedText = '';
@@ -44,10 +47,7 @@ class CaeserCipher
 
     private function normalizeShift($shift)
     {
-        if ($shift < 0) {
-            return $shift + 26 * (ceil(-$shift / 26));
-        }
-
-        return $shift % 26;
+        // Makes sure that $shift is between 0 and 25.
+        return $shift + 26 * (ceil(-$shift / 26));
     }
 }

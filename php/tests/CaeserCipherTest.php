@@ -47,6 +47,16 @@ class CaeserCipherTest extends \PHPUnit_Framework_TestCase
         $this->assertEncrypt(263, 'ABCDWXYZ', 'DEFGZABC');
     }
 
+    public function test_encrypt_shiftsLetters25()
+    {
+        $this->assertEncrypt(25, 'defgzabc', 'CDEFYZAB');
+    }
+
+    public function test_encrypt_shiftsLetters51()
+    {
+        $this->assertEncrypt(25, 'defgzabc', 'CDEFYZAB');
+    }
+
     public function test_encrypt_shiftsLettersMinus263()
     {
         $this->assertEncrypt(-263, 'ABCDWXYZ', 'XYZATUVW');
@@ -80,6 +90,11 @@ class CaeserCipherTest extends \PHPUnit_Framework_TestCase
     public function test_decrypt_shiftsLetters263()
     {
         $this->assertDecrypt(263, 'defgzabc', 'ABCDWXYZ');
+    }
+
+    public function test_decrypt_shiftsLetters25()
+    {
+        $this->assertDecrypt(25, 'defgzabc', 'EFGHABCD');
     }
 
     public function test_decrypt_shiftsLettersMinus263()
