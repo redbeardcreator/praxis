@@ -7,14 +7,63 @@ class CaeserCipherTest extends \PHPUnit_Framework_TestCase
     public function test_constructor_defaultsToShift3()
     {
         $cc = new CaeserCipher;
-        $this->assertEquals(3, $cc->shift);
+        $this->assertEquals(3, $cc->getShift());
     }
 
     public function test_constructor_setsShift()
     {
         $shift = 17;
         $cc = new CaeserCipher($shift);
-        $this->assertEquals($shift, $cc->shift);
+        $this->assertEquals($shift, $cc->getShift());
+    }
+
+    public function test_setShift_setsTheShift()
+    {
+        $shift = 13;
+        $cc = new CaeserCipher();
+
+        $cc->setShift($shift);
+
+        $this->assertEquals($shift, $cc->getShift());
+    }
+
+    /**
+     * @dataProvider shiftProvider
+     */
+    public function test_setShift_normalizesShift($shift, $expected)
+    {
+        $cc = new CaeserCipher();
+        $cc->setShift($shift);
+        $this->assertEquals($expected, $cc->getShift());
+    }
+
+    public function shiftProvider()
+    {
+        return [[1, 1],
+                [0, 0],
+                [25, 25],
+                [26, 0], // Shifting 26 letters wraps to the beginning
+                [27, 1],
+                [28, 2],
+                [51, 25],
+                [52, 0],
+                [53, 1],
+                [259, 25],
+                [260, 0],
+                [261, 1],
+                [-1, 25], // Going backwards 1 is the same as ahead 25
+                [-2, 24],
+                [-3, 23],
+                [-25, 1],
+                [-26, 0],
+                [-27, 25],
+                [-51, 1],
+                [-52, 0],
+                [-53, 25],
+                [-259, 1],
+                [-260, 0],
+                [-261, 25],
+        ];
     }
 
     public function test_encrypt_returnsEmptyString()

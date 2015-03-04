@@ -13,7 +13,7 @@ class CaeserCipher
     const ASCII_A = 65;
 
     /** @var int $shift  Amount to shift letters */
-    public $shift;
+    protected $shift;
 
     /**
      * Create a CaeserCipher
@@ -21,6 +21,26 @@ class CaeserCipher
      * @param int $shift  How far to shift in the alphabet
      */
     public function __construct($shift = 3)
+    {
+        $this->setShift($shift);
+    }
+
+    /**
+     * Retrieve the amount of shift
+     *
+     * @return int  The amount to shift letters
+     */
+    public function getShift()
+    {
+        return $this->shift;
+    }
+
+    /**
+     * Set the amount to shift by
+     *
+     * @param int $shift  The amount to set
+     */
+    public function setShift($shift)
     {
         $this->shift = $this->normalizeShift($shift);
     }
