@@ -69,4 +69,17 @@ class Yegge
 
         return $c;
     }
+
+    /**
+     * Print a 12 x 12 multiplication table to stdout
+     */
+    public function printMultiplicationTable()
+    {
+        foreach (range(1, 12) as $x) {
+            foreach (range(1, 12) as $y) {
+                printf("%4d", $x * $y);
+            }
+            echo "\n";
+        }
+    }
 }
