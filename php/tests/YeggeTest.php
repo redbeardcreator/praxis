@@ -1,6 +1,7 @@
 <?php
 
 namespace RC\ProgrammingPraxis;
+use org\bovigo\vfs\vfsStream;
 
 class YeggeTest extends \PHPUnit_Framework_TestCase
 {
@@ -94,5 +95,20 @@ class YeggeTest extends \PHPUnit_Framework_TestCase
 EOD;
         $this->expectOutputString($expected);
         $this->yegge->printMultiplicationTable();
+    }
+
+    public function test_sumFromFile()
+    {
+        $fname = 'getit.txt';
+        $values = [ 1, 20, 13, 57, 185 ];
+        $expected = array_sum($values);
+        $root = vfsStream::setup();
+        $file = vfsStream::newFile($fname)
+              ->withContent(implode("\n", $values))
+              ->at($root);
+
+        $actual = $this->yegge->sumFile($file->url());
+
+        $this->assertSame($expected, $actual);
     }
 }

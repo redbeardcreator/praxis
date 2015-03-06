@@ -75,11 +75,28 @@ class Yegge
      */
     public function printMultiplicationTable()
     {
+        // Use range to make it resistent to mutation testing
         foreach (range(1, 12) as $x) {
             foreach (range(1, 12) as $y) {
                 printf("%4d", $x * $y);
             }
             echo "\n";
         }
+    }
+
+    /**
+     * Sum the rows in the given file
+     *
+     * @param string $fileName  The path to the file to read
+     *
+     * @return int  Sum of each line of the file, which should be integers.
+     */
+    public function sumFile($fileName)
+    {
+        $data = file($fileName);
+
+        // Could use array_sum(), but the instructions say to not use existing functionality
+        $sum = array_reduce($data, function ($sum, $num) { return $sum + $num; }, 0);
+        return $sum;
     }
 }
