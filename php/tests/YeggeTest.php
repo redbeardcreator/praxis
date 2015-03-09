@@ -111,6 +111,21 @@ EOD;
 
         $this->assertSame($expected, $actual);
     }
+
+    public function test_sumFromFile_emptyFilee()
+    {
+        $fname = 'getit.txt';
+        $expected = 0;
+        $root = vfsStream::setup();
+        $file = vfsStream::newFile($fname)
+              ->withContent('')
+              ->at($root);
+
+        $actual = $this->yegge->sumFile($file->url());
+
+        $this->assertSame($expected, $actual);
+    }
+
     public function test_printOddNums()
     {
         $expected = "  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29\n"
