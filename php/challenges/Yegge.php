@@ -99,4 +99,19 @@ class Yegge
         $sum = array_reduce($data, function ($sum, $num) { return $sum + $num; }, 0);
         return $sum;
     }
+
+    /**
+     * Print all the odd numbers from 1 to 100
+     */
+    public function printOddNums()
+    {
+        for ($i = 1; $i <= 99; $i += 2) {
+            printf("%3d", $i);
+            if (($i / 2 + 1) % 15 == 0) {
+                echo "\n";
+            }
+        }
+        echo "\n";
+    }
+
 }
