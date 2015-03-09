@@ -122,4 +122,25 @@ EOD;
         $this->yegge->printOddNums();
     }
 
+    /**
+     * @dataProvider findLargestProvider
+     */
+    public function test_findLargest($list, $max)
+    {
+        $this->assertEquals($max, $this->yegge->findLargest($list));
+    }
+
+    public function findLargestProvider()
+    {
+        return [[[1], 1],
+                [[1,2], 2],
+                [[2,1], 2],
+                [[1,2,3], 3],
+                [[2,3,1], 3],
+                [[3,1,2], 3],
+                [[1,5,2,9,3,4,10,22,34,99,12,43,8,12,99,4,3,5], 99],
+                [[-1, -5, -3, -10], -1],
+                [[], false],
+        ];
+    }
 }

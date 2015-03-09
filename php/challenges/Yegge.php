@@ -114,4 +114,24 @@ class Yegge
         echo "\n";
     }
 
+    /**
+     * Find the largest value in an array
+     *
+     * @param array $list  The list of items to find the maximum value of
+     *
+     * @return mixed  The maximum value of $list
+     */
+    public function findLargest(array $list)
+    {
+        if (empty($list)) {
+            return false;
+        }
+
+        $max = $list[0];
+        foreach ($list as $i) {
+            $max = max($max, $i);
+        }
+
+        return $max;
+    }
 }
